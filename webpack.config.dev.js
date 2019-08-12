@@ -9,7 +9,7 @@ module.exports = {
     },
   },
   mode: 'development',
-  entry: ['react-hot-loader/patch', 'babel-polyfill', './src/index.js'],
+  entry: ['react-hot-loader/patch', './src/index.js'],
   output: {
     filename: 'bundle.js',
     publicPath: '/',

@@ -9,6 +9,7 @@ const App = () => {
     <React.Fragment>
       <Global styles={globalStyle} />
       <Notifications />
+      <div>It works!</div>
     </React.Fragment>
   );
 };
