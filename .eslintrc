@@ -21,7 +21,7 @@
   "parser": "babel-eslint",
   "settings": {
     "react": {
-      "version": "16.5.2"
+      "version": "16.9.0"
     }
   },
   "env": {
