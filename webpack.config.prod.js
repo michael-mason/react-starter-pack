@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -13,7 +13,7 @@ module.exports = {
   },
   mode: 'production',
   entry: {
-    main: ['react-hot-loader/patch', 'babel-polyfill', './src/index.js'],
+    main: ['react-hot-loader/patch', './src/index.js'],
     vendor: ['react', 'react-dom', 'prop-types', 'redux', 'react-redux'],
   },
   output: {
@@ -34,7 +34,6 @@ module.exports = {
       new UglifyJsPlugin({
         cache: true,
         parallel: true,
-        sourceMap: true,
         uglifyOptions: {
           warnings: false,
         },
@@ -60,7 +59,7 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(png|svg|jpg|gif|ttf)$/,
+        test: /\.(png|svg|jpe?g|gif|ttf)$/,
         use: [
           {
             loader: 'file-loader',
@@ -73,9 +72,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], {
-      allowExternal: true,
-    }),
+    new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
@@ -87,7 +84,6 @@ module.exports = {
       appMountId: 'root',
       title: 'React starter pack',
       mobile: true,
-      filename: 'index.html',
     }),
     new webpack.HashedModuleIdsPlugin(),
     new CopyWebpackPlugin([
