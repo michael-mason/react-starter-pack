@@ -2,36 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import posed from 'react-pose';
+import { motion } from 'framer-motion';
 import styled from '@emotion/styled';
 import { colors } from '../misc/style';
 import * as notificationActions from '../actions/notifications';
-
-const PosedNotifications = posed.div({
-  show: {
-    y: '-1vmax',
-    transition: {
-      type: 'spring',
-      mass: 0.2,
-      damping: 5,
-    },
-  },
-  hide: {
-    y: '-7vmax',
-    transition: {
-      type: 'spring',
-      mass: 0.2,
-      damping: 5,
-    },
-  },
-});
 
 const notificationColours = {
   success: colors.green,
   error: colors.red,
 };
 
-const StyledNotifications = styled(PosedNotifications)`
+const StyledNotifications = styled(motion.div)`
   position: fixed;
   display: block;
   top: 0;
@@ -48,34 +29,48 @@ const StyledNotifications = styled(PosedNotifications)`
   background: ${props => notificationColours[props.type]};
 `;
 
-class Notifications extends React.Component {
-  static propTypes = {
-    notifications: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired,
-  };
-
-  hideNotification = e => {
-    const { actions } = this.props;
-
+const Notifications = ({ notifications, actions }) => {
+  const hideNotification = e => {
     e.stopPropagation();
     actions.hideNotification();
   };
 
-  render() {
-    const { notifications } = this.props;
+  const variants = {
+    show: {
+      y: '-1vmax',
+      transition: {
+        type: 'spring',
+        mass: 0.2,
+        damping: 5,
+      },
+    },
+    hide: {
+      y: '-7vmax',
+      transition: {
+        type: 'spring',
+        mass: 0.2,
+        damping: 5,
+      },
+    },
+  };
 
-    return (
-      <StyledNotifications
-        type={notifications.type}
-        pose={notifications.active ? 'show' : 'hide'}
-        onClick={this.hideNotification}
-        onKeyDown={this.hideNotification}
-      >
-        {notifications.text}
-      </StyledNotifications>
-    );
-  }
-}
+  return (
+    <StyledNotifications
+      type={notifications.type}
+      animate={notifications.active ? 'show' : 'hide'}
+      variants={variants}
+      onClick={hideNotification}
+      onKeyDown={hideNotification}
+    >
+      {notifications.text}
+    </StyledNotifications>
+  );
+};
+
+Notifications.propTypes = {
+  notifications: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+};
 
 const mapState = ({ notifications }) => ({
   notifications,
