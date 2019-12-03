@@ -6,7 +6,7 @@ const initialState = {
   active: false,
 };
 
-export default function reducer(state = initialState, action) {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case NOTIFICATION_SHOW:
       return {
@@ -22,4 +22,6 @@ export default function reducer(state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default reducer;
