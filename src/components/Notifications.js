@@ -80,7 +80,4 @@ const mapDispatch = dispatch => ({
   actions: bindActionCreators(notificationActions, dispatch),
 });
 
-export default connect(
-  mapState,
-  mapDispatch,
-)(Notifications);
+export default connect(mapState, mapDispatch)(Notifications);
