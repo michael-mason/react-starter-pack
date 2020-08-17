@@ -18,4 +18,4 @@ export const showSuccess = (text, persist = false) =>
   showNotification(text, 'success', persist);
 export const showError = (text, persist = false) =>
   showNotification(text, 'error', persist);
-export const showFatal = text => showNotification(text, 'error', true);
+export const showFatal = (text) => showNotification(text, 'error', true);

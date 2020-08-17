@@ -9,7 +9,7 @@ function* showNotifications(action) {
       yield delay(5000);
     }
 
-    if (yield select(state => state.notifications.active)) {
+    if (yield select((state) => state.notifications.active)) {
       yield put(notificationActions.hideNotification());
     }
   }

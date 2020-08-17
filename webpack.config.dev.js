@@ -36,12 +36,21 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      alwaysWriteToDisk: false,
-      inject: false,
-      template: require('html-webpack-template'),
-      appMountId: 'root',
+      templateContent: ({ htmlWebpackPlugin }) => `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>${htmlWebpackPlugin.options.title}</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          </head>
+          <body>
+            <div id="root"></div>
+          </body>
+        </html>
+      `,
       title: 'React starter pack',
-      mobile: false,
     }),
   ],
   devServer: {

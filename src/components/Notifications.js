@@ -26,11 +26,11 @@ const StyledNotifications = styled(motion.div)`
   height: 6vmax;
   line-height: 6.5vmax;
   text-align: center;
-  background: ${props => notificationColours[props.type]};
+  background: ${(props) => notificationColours[props.type]};
 `;
 
 const Notifications = ({ notifications, actions }) => {
-  const hideNotification = e => {
+  const hideNotification = (e) => {
     e.stopPropagation();
     actions.hideNotification();
   };
@@ -76,7 +76,7 @@ const mapState = ({ notifications }) => ({
   notifications,
 });
 
-const mapDispatch = dispatch => ({
+const mapDispatch = (dispatch) => ({
   actions: bindActionCreators(notificationActions, dispatch),
 });
 

@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 import * as reducers from '../reducers';
 import rootSaga from '../sagas';
 
-const configureStore = preloadedState => {
+const configureStore = (preloadedState) => {
   const sagaMiddleware = createSagaMiddleware();
 
   const rootReducer = combineReducers({
